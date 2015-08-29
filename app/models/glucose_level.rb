@@ -14,15 +14,18 @@ class GlucoseLevel < ActiveRecord::Base
   # max - maximum glucose level between two dates
   # min - minimum glucose level between two dates
   # avg - average glucose level between two dates
-  def get_report_data date1, date2
-    sum, min, max, count = 0
+  def self.get_report_data date1, date2, user_id
+    sum = 0
+    min = 0
+    max = 0
+    count = 0
     where(:user_id => user_id, :registered_date => Date.parse(date1)..Date.parse(date2)).select(&:level).each do |gl|
       sum += gl.level
-      min = gl.level if min > gl.level
+      min = gl.level if min == 0 || min > gl.level
       max = gl.level if max < gl.level
       count += 1
     end
-    return min. max, ((sum.to_f/count).round(3) rescue 0))
+    return min, max, ((sum.to_f/count).round(3) rescue 0)
   end
 
   private
@@ -30,6 +33,6 @@ class GlucoseLevel < ActiveRecord::Base
   # Method to check the daily limit for the glucose level entries.
   # Can not be more than 4 for a particular date.
   def daily_limit_check
-    errors.add(:base, "Can not be added more than 4 times a day.") if where(:user_id => user_id, :registered_date => registered_date).size >= 4
+    errors.add(:base, "Glucose Level can not be added more than 4 times a day.") if GlucoseLevel.where(:user_id => user_id, :registered_date => registered_date).size >= 4
   end
 end

@@ -13,8 +13,14 @@ class User < ActiveRecord::Base
   # Else, we will get it from the first part of his email address
   def get_name
     name = [first_name, last_name].join(" ")
-    email.split("@").first.gsub(/[^0-9A-Za-z]/, " ") if name.blank?
-    name
+    name = email.split("@").first.gsub(/[^0-9A-Za-z]/, " ") if name.blank?
+    name.titleize
+  end
+  
+  # Method to get glucose levels for a date
+  def get_levels date = nil
+    date = Date.today if date.nil?
+    glucose_levels.where(:registered_date => date)
   end
   
 end

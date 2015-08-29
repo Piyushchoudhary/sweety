@@ -1,0 +1,8 @@
+<div class="border-form-div margin-top-20">
+	<%= bootstrap_form_for(@glucose_level) do |f| %>
+		<%= f.text_field :level, autofocus: true, placeholder: 'Level' %>
+	  <div class="actions text-center">
+	    <%= f.submit "Save", class: 'btn btn-sm btn-primary'%>
+	  </div>
+	<% end %>
+</div>

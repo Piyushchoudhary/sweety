@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+
+  resources :glucose_levels
+  resources :reports do
+    post 'fetch', on: :collection
+  end
   devise_for :users
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

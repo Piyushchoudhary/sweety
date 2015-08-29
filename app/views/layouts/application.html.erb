@@ -16,8 +16,28 @@
   <![endif]-->
 </head>
 <body>
-<%= render 'shared/navigation_bar' %>
-<%= yield %>
-
+	<div class="container">
+		<div class="flash_messages">
+			<%=raw flash_messages flash %>
+		</div>
+		<div class="row">
+			<div class="col-lg-12">
+				<%= render 'shared/navigation_bar' %>
+				<div class="row">
+					<% if user_signed_in? %>
+						<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+							<%= render partial: "/shared/left_nav" %>
+						</div>
+						<div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+							<%= yield %>
+						</div>
+					<% else %>
+						<div class="col-lg-12">
+							<%= yield %>
+						</div>
+					<% end %>
+				</div>
+			</div>
+	</div>
 </body>
 </html>

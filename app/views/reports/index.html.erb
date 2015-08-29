@@ -1,0 +1,60 @@
+<div class="row">
+  <div class="col-lg-12">
+    <h2 class="page-header" style="margin:0px;">
+      Reports
+      <small>Your blood sugar report</small>
+    </h1>
+  </div>
+</div>
+<div class="clear margin-top-20"></div>
+<div class="row">
+  <div class="col-lg-12">
+		<div class="border-form-div">
+			<%= bootstrap_form_tag url: fetch_reports_path, method: :post do |f| %>
+				<%= f.form_group :type, class: "field text-center" do %>
+				  <%= f.radio_button :type, 'daily', label: "Daily", checked: (@type.nil? || @type == "daily"), inline: true %>
+				  <%= f.radio_button :type, 'month_to_date', label: "Month to Date", checked: (@type == "month_to_date"), inline: true %>
+				  <%= f.radio_button :type, 'monthly', label: "Monthly", checked: (@type == "monthly"), inline: true %>
+				<% end %>
+				<%= f.text_field :date, value: @date, class: "datepicker" %>
+			  <div class="actions text-center">
+			    <%= f.submit "Get Reports", class: 'btn btn-sm btn-primary'%>
+			  </div>
+			<% end %>
+	    <div class="clear"></div>
+		</div>
+  </div>
+</div>
+<div class="clear"></div>
+<% if @avg.present? %>
+	<div class="row">
+	  <div class="col-lg-12">
+	    <h2 class="page-header" style="margin:0px;">
+	      Data
+	      <small><%= report_range_display @type, @date %></small>
+	    </h2>
+	  </div>
+	</div>
+	<div class="clear"></div>
+	<div class="row margin-top-20">
+	  <div class="col-lg-12">
+			<b>Maximum Value : <%= @max %></b>
+	  </div>
+	  <div class="col-lg-12">
+			<b>Minimum Value : <%= @min %></b>
+	  </div>
+	  <div class="col-lg-12">
+			<b>Average Value : <%= @avg %></b>
+	  </div>
+	</div>
+	<div class="clear"></div>
+<% end %>
+<script type="text/javascript">
+	$(function(){
+		$('.datepicker').datepicker({
+      format: 'yyyy-mm-dd',
+    }).on('changeDate', function(e){
+	    $(this).datepicker('hide');
+	});
+	});
+</script>

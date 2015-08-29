@@ -7,6 +7,6 @@ class CreateGlucoseLevels < ActiveRecord::Migration
 
       t.timestamps null: false
     end
-    add_index :glucose_levels, :user_id, unique: true
+    add_index :glucose_levels, :user_id
   end
 end
