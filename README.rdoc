@@ -3,26 +3,26 @@
 This README would normally document whatever steps are necessary to get the
 application up and running.
 
-Things you may want to cover:
+Requirements :
 
-* Ruby version
+* Ruby version - ruby 2.2.1p85
 
-* System dependencies
+* Rails 4.2.1
 
-* Configuration
+* Mysql server up and running
 
-* Database creation
+* Bundler gem
 
-* Database initialization
+Steps to setup the application :
 
-* How to run the test suite
+* Checkout the code to the local
 
-* Services (job queues, cache servers, search engines, etc.)
+* Run 'bundle install' from project root directory
 
-* Deployment instructions
+* Run 'rake db:create' & 'rake db:migrate' from project root directory to set up the database
 
-* ...
+* Run 'rails s' to start the server.
 
+Steps to run the tests :
 
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+* Run 'rake spec:requests' from project root directory
