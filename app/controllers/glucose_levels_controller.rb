@@ -11,6 +11,7 @@ class GlucoseLevelsController < ApplicationController
     @glucose_level = current_user.glucose_levels.new(glucose_level_params.merge!(:registered_date => Date.today))
  
     if @glucose_level.save
+      flash[:success] = "Glucose level added successfully."
       redirect_to glucose_levels_path
     else
       flash.now[:error] = "Sorry, #{@glucose_level.errors[:base].join(', ')}" if @glucose_level.errors[:base].present?

@@ -6,7 +6,7 @@ module ReportsHelper
     when 'month_to_date'
       Date.parse(date).at_beginning_of_month.to_s + " to " + Date.parse(date).to_s
     when 'monthly'
-      Date.parse(date).at_beginning_of_month.to_s + " to " + Date.parse(date).at_end_of_month.to_s
+      Date.parse(date).prev_month.to_s + " to " + Date.parse(date).to_s
     end
   end
 end

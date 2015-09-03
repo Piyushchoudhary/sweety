@@ -4,8 +4,8 @@ class GlucoseLevel < ActiveRecord::Base
   belongs_to  :user
   
   # Validations
-  validates   :level,           presence: true, numericality: { only_integer: true }
-  validates   :registered_date, presence: true
+  validates   :level,                 presence: true, numericality: { only_integer: true }
+  validates   :registered_date,       presence: true
   validate    :daily_limit_check,     on: :create
   
 

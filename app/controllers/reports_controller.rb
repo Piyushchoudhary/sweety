@@ -18,7 +18,7 @@ class ReportsController < ApplicationController
     when 'month_to_date'
       @min, @max, @avg = GlucoseLevel.get_report_data(Date.parse(@date).at_beginning_of_month.to_s, Date.parse(@date).to_s, current_user.id)
     when 'monthly'
-      @min, @max, @avg = GlucoseLevel.get_report_data(Date.parse(@date).at_beginning_of_month.to_s, Date.parse(@date).at_end_of_month.to_s, current_user.id)
+      @min, @max, @avg = GlucoseLevel.get_report_data(Date.parse(@date).prev_month.to_s, Date.parse(@date).to_s, current_user.id)
     end
     render  :index
   end
