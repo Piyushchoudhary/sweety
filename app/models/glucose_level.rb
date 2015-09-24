@@ -25,6 +25,7 @@ class GlucoseLevel < ActiveRecord::Base
       max = gl.level if max < gl.level
       count += 1
     end
+    count = 1 if count == 0
     return min, max, ((sum.to_f/count).round(3) rescue 0)
   end
 
